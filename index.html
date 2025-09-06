@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martinet - Fromagerie Artisanale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* --- VARIABLES ET RESET --- */
+        :root {
+            --color-primary: #5a8c5a;
+            --color-secondary: #d2b48c;
+            --color-accent: #8b5a2b;
+            --color-light: #f8f4e9;
+            --color-dark: #3e2723;
+            --color-white: #ffffff;
+            --color-success: #4caf50;
+            --color-error: #f44336;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background-color: var(--color-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: var(--color-accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--color-secondary);
+            margin: 10px auto;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--color-white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--color-secondary);
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('LM.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--color-white);
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-white);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-text h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            margin-top: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            background: var(--color-secondary);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+        }
+
+        /* --- PRODUCTS SECTION --- */
+        .products {
+            background: linear-gradient(to bottom, var(--color-light), var(--color-white));
+        }
+
+        .products-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: var(--color-primary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            background: var(--color-light);
+            border: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            background: transparent;
+        }
+
+        /* --- PROCESS SECTION --- */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            counter-reset: step-counter;
+        }
+
+        .process-step {
+            background: var(--color-white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            counter-increment: step-counter;
+        }
+
+        .process-step:before {
+            content: counter(step-counter);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .process-icon {
+            font-size: 2.5rem;
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* --- ORDER SECTION --- */
+        .order {
+            background: linear-gradient(to right, var(--color-primary), var(--color-dark));
+            color: var(--color-white);
+        }
+
+        .order .section-title {
+            color: var(--color-white);
+        }
+
+        .order .section-title:after {
+            background: var(--color-secondary);
+        }
+
+        .order-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .order-info {
+            padding: 2rem;
+        }
+
+        .order-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .order-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--color-secondary);
+        }
+
+        .order-form {
+            background: var(--color-white);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            color: var(--color-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: var(--color-white);
+            font-family: inherit;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials {
+            background: var(--color-light);
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-text:before, .testimonial-text:after {
+            content: """;
+            font-size: 4rem;
+            color: var(--color-secondary);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .testimonial-text:before {
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial-text:after {
+            content: """;
+            bottom: -40px;
+            right: -10px;
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .testimonial-control {
+            background: transparent;
+            border: 2px solid var(--color-secondary);
+            color: var(--color-secondary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .testimonial-control:hover {
+            background: var(--color-secondary);
+            color: var(--color-dark);
+        }
+
+        /* --- COMPLAINT SECTION --- */
+        .complaint {
+            background: var(--color-white);
+        }
+
+        .complaint-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .complaint-info {
+            padding: 2rem;
+            background: var(--color-light);
+            border-radius: var(--border-radius);
+        }
+
+        .complaint-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .complaint-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--color-primary);
+        }
+
+        .complaint-form {
+            background: var(--color-light);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact {
+            background: linear-gradient(to right, var(--color-primary), var(--color-dark));
+            color: var(--color-white);
+        }
+
+        .contact .section-title {
+            color: var(--color-white);
+        }
+
+        .contact .section-title:after {
+            background: var(--color-secondary);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            padding: 2rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--color-secondary);
+        }
+
+        .contact-form {
+            background: var(--color-white);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            color: var(--color-dark);
+        }
+
+        /* --- MAP --- */
+        .map {
+            height: 400px;
+            margin-top: 5rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: 4rem 0 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .footer-about {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--color-primary);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--color-secondary);
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-secondary);
+            padding-left: 5px;
+        }
+
+        .footer-newsletter p {
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+        }
+
+        .newsletter-btn {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            padding: 0 1rem;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- CART MODAL --- */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: var(--color-white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: var(--transition);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-close {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-price {
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        .cart-item-remove {
+            color: var(--color-error);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #ddd;
+        }
+
+        .cart-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* --- NOTIFICATION --- */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            color: var(--color-white);
+            z-index: 1002;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .notification.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification.success {
+            background: var(--color-success);
+        }
+
+        .notification.error {
+            background: var(--color-error);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .about-content,
+            .order-container,
+            .complaint-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                background: var(--color-white);
+                width: 80%;
+                height: calc(100vh - 80px);
+                flex-direction: column;
+                padding: 2rem;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                margin: 1.5rem 0;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cart-modal {
+                width: 300px;
+            }
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-cheese"></i>
+                Martinet
+            </a>
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#products">Fromages</a></li>
+                <li><a href="#order">Commander</a></li>
+                <li><a href="#complaint">Réclamation</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" id="cartButton">Panier <i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title animate">L'Art du Fromage Authentique</h1>
+            <p class="hero-subtitle animate delay-1">Découvrez les saveurs uniques de nos fromages artisanaux fabriqués avec passion depuis 2018</p>
+            <div class="hero-buttons animate delay-2">
+                <a href="#products" class="btn">Découvrir nos fromages</a>
+                <a href="#order" class="btn btn-outline">Commander en ligne</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">Notre Histoire</h2>
+            <div class="about-content">
+                <div class="about-image animate">
+                    <img src="XLM.jpg" alt="Notre fromagerie">
+                </div>
+                <div class="about-text">
+                    <h2>Une passion fromagère depuis 2018</h2>
+                    <p>Fondée en 2018 par la famille Martinet, notre fromagerie perpétue l'art ancestral de la fabrication fromagère avec des méthodes traditionnelles et un engagement indéfectible envers la qualité.</p>
+                    <p>Nous sélectionnons rigoureusement notre lait auprès d'éleveurs locaux engagés dans une agriculture respectueuse de l'environnement et du bien-être animal.</p>
+                    <div class="about-features">
+                        <div class="feature animate delay-1">
+                            <div class="feature-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div>
+                                <h3>Livraison Directe</h3>
+                                <p>Nous livrons nos produits frais avec nos propres camions</p>
+                            </div>
+                        </div>
+                        <div class="feature animate delay-2">
+                            <div class="feature-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <h3>Qualité Exceptionnelle</h3>
+                                <p>Fromages primés aux concours agricoles nationaux</p>
+                            </div>
+                        </div>
+                        <div class="feature animate delay-3">
+                            <div class="feature-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div>
+                                <h3>Fait avec Passion</h3>
+                                <p>Un amour authentique du métier dans chaque produit</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="section products">
+        <div class="container">
+            <h2 class="section-title">Nos Fromages</h2>
+            <div class="products-filter">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="martinet">Martinet</button>
+                <button class="filter-btn" data-filter="martchevre">Martéchèvre</button>
+            </div>
+            <div class="products-grid">
+                <div class="product-card animate" data-category="martinet">
+                    <div class="product-image">
+                        <img src="59b20726882f267384e84c68c019093b.jpg" alt="Fromage Martinet 350g">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Martinet 350g</h3>
+                        <p class="product-price">450 DA</p>
+                        <p class="product-description">Fromage crémeux à la texture fondante et au goût subtil de noisette.</p>
+                        <div class="product-actions">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="text" class="quantity-input" value="1" readonly>
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                            <button class="btn btn-outline add-to-cart" data-product="Martinet 350g" data-price="450">Ajouter</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card animate delay-1" data-category="martinet">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?ixlib=rb-4.0.3" alt="Fromage Martinet 250g">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Martinet 250g</h3>
+                        <p class="product-price">350 DA</p>
+                        <p class="product-description">Fromage à pâte pressée cuite, affiné 6 mois, aux arômes fruités.</p>
+                        <div class="product-actions">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="text" class="quantity-input" value="1" readonly>
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                            <button class="btn btn-outline add-to-cart" data-product="Martinet 250g" data-price="350">Ajouter</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card animate delay-2" data-category="martinet">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1568461401890-41da2f9e5d2d?ixlib=rb-4.0.3" alt="Fromage Martinet 125g">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Martinet 125g</h3>
+                        <p class="product-price">250 DA</p>
+                        <p class="product-description">Fromage au lait cru, à la pâte souple et au caractère affirmé.</p>
+                        <div class="product-actions">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="text" class="quantity-input" value="1" readonly>
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                            <button class="btn btn-outline add-to-cart" data-product="Martinet 125g" data-price="250">Ajouter</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card animate delay-3" data-category="martchevre">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1589881136373-df5786e8220c?ixlib=rb-4.0.3" alt="Fromage Martéchèvre">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Martéchèvre</h3>
+                        <p class="product-price">300 DA</p>
+                        <p class="product-description">Fromage de chèvre à pâte persillée, puissant et corsé.</p>
+                        <div class="product-actions">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus">-</button>
+                                <input type="text" class="quantity-input" value="1" readonly>
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                            <button class="btn btn-outline add-to-cart" data-product="Martéchèvre" data-price="300">Ajouter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="section">
+        <div class="container">
+            <h2 class="section-title">Notre Savoir-Faire</h2>
+            <div class="process-steps">
+                <div class="process-step animate">
+                    <div class="process-icon">
+                        <i class="fas fa-cow"></i>
+                    </div>
+                    <h3>Lait Cru de Qualité</h3>
+                    <p>Nous sélectionnons rigoureusement le lait cru de nos partenaires éleveurs locaux.</p>
+                </div>
+                <div class="process-step animate delay-1">
+                    <div class="process-icon">
+                        <i class="fas fa-blender"></i>
+                    </div>
+                    <h3>Caillage & Égouttage</h3>
+                    <p>Transformation du lait en caillé selon des méthodes traditionnelles.</p>
+                </div>
+                <div class="process-step animate delay-2">
+                    <div class="process-icon">
+                        <i class="fas fa-hand-holding-water"></i>
+                    </div>
+                    <h3>Moulage à la Main</h3>
+                    <p>Chaque fromage est moulé manuellement pour préserver son authenticité.</p>
+                </div>
+                <div class="process-step animate delay-3">
+                    <div class="process-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Affinage Maîtrisé</h3>
+                    <p>Affinage en cave à une température et hygrométrie contrôlées.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section id="order" class="section order">
+        <div class="container">
+            <h2 class="section-title">Commander en Ligne</h2>
+            <div class="order-container">
+                <div class="order-info">
+                    <h2>Notre Service de Livraison</h2>
+                    <p>Nous livrons nos produits frais directement à votre domicile avec nos propres camions réfrigérés pour garantir la qualité optimale de nos fromages.</p>
+                    <div class="order-info-item">
+                        <div class="order-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div>
+                            <h3>Livraison Rapide</h3>
+                            <p>Livraison sous 24h dans toute la région</p>
+                        </div>
+                    </div>
+                    <div class="order-info-item">
+                        <div class="order-icon">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                        <div>
+                            <h3>Paiement Sécurisé</h3>
+                            <p>Paiement à la livraison ou en ligne sécurisé</p>
+                        </div>
+                    </div>
+                    <div class="order-info-item">
+                        <div class="order-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div>
+                            <h3>Emballage Cadeau</h3>
+                            <p>Option emballage cadeau pour vos présents</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="order-form" id="orderForm">
+                    <h2>Formulaire de Commande</h2>
+                    <div class="form-group">
+                        <label for="orderName" class="form-label">Nom complet</label>
+                        <input type="text" id="orderName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderPhone" class="form-label">Téléphone</label>
+                        <input type="tel" id="orderPhone" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderEmail" class="form-label">Email</label>
+                        <input type="email" id="orderEmail" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderAddress" class="form-label">Adresse de livraison</label>
+                        <textarea id="orderAddress" class="form-input" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderDate" class="form-label">Date de livraison souhaitée</label>
+                        <input type="date" id="orderDate" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderNotes" class="form-label">Notes supplémentaires</label>
+                        <textarea id="orderNotes" class="form-input"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Commander</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">Ce que disent nos clients</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial active">
+                    <p class="testimonial-text">Les fromages Martinet sont une véritable découverte! Leur Martéchèvre est tout simplement exceptionnel, avec une texture fondante et des arômes complexes qui raviront les palais les plus exigeants.</p>
+                    <p class="testimonial-author">Marie Lefebvre</p>
+                    <p class="testimonial-role">Cheffe cuisinière étoilée</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">Je me fournis chez Martinet depuis leur début en 2018 pour mon restaurant. La qualité constante de leurs produits et leur savoir-faire artisanal font toute la différence dans mes plats.</p>
+                    <p class="testimonial-author">Pierre Dubois</p>
+                    <p class="testimonial-role">Restaurateur</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">Chaque visite à la fromagerie Martinet est un plaisir. Leurs conseils avisés et leurs produits d'exception font de chaque repas un moment de gourmandise et de partage.</p>
+                    <p class="testimonial-author">Sophie Martin</p>
+                    <p class="testimonial-role">Amateur de fromages</p>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button class="testimonial-control prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="testimonial-control next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Complaint Section -->
+    <section id="complaint" class="section complaint">
+        <div class="container">
+            <h2 class="section-title">Service Client & Réclamations</h2>
+            <div class="complaint-container">
+                <div class="complaint-info">
+                    <h2>Votre Satisfaction est Notre Priorité</h2>
+                    <p>Nous accordons une importance particulière à la satisfaction de nos clients. Si vous avez une réclamation ou une suggestion, n'hésitez pas à nous contacter.</p>
+                    <div class="complaint-info-item">
+                        <div class="complaint-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Réponse Sous 24h</h3>
+                            <p>Nous traitons toutes les demandes dans les 24 heures</p>
+                        </div>
+                    </div>
+                    <div class="complaint-info-item">
+                        <div class="complaint-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div>
+                            <h3>Service Client</h3>
+                            <p>Du lundi au samedi de 8h à 18h</p>
+                        </div>
+                    </div>
+                    <div class="complaint-info-item">
+                        <div class="complaint-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div>
+                            <h3>Solution Personnalisée</h3>
+                            <p>Nous trouverons une solution adaptée à votre situation</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="complaint-form" id="complaintForm">
+                    <h2>Formulaire de Réclamation</h2>
+                    <div class="form-group">
+                        <label for="complaintName" class="form-label">Nom complet</label>
+                        <input type="text" id="complaintName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="complaintEmail" class="form-label">Email</label>
+                        <input type="email" id="complaintEmail" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="complaintPhone" class="form-label">Téléphone</label>
+                        <input type="tel" id="complaintPhone" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="complaintType" class="form-label">Type de réclamation</label>
+                        <select id="complaintType" class="form-select" required>
+                            <option value="">Sélectionnez une option</option>
+                            <option value="quality">Problème de qualité</option>
+                            <option value="delivery">Problème de livraison</option>
+                            <option value="service">Problème de service</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="complaintDetails" class="form-label">Détails de la réclamation</label>
+                        <textarea id="complaintDetails" class="form-input" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="complaintOrder" class="form-label">Numéro de commande (si applicable)</label>
+                        <input type="text" id="complaintOrder" class="form-input">
+                    </div>
+                    <button type="submit" class="btn">Envoyer la réclamation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Nous Contacter</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Venez nous rencontrer</h2>
+                    <p>Notre fromagerie vous accueille dans un cadre chaleureux et authentique pour vous faire découvrir l'ensemble de nos produits.</p>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Adresse</h3>
+                            <p>12 Rue des Fromagers, 75000 Paris</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Horaires</h3>
+                            <p>Du mardi au samedi: 9h-13h / 15h-19h</p>
+                            <p>Dimanche: 9h-13h</p>
+                            <p>Lundi: Fermé</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3>Téléphone</h3>
+                            <p>+33 1 23 45 67 89</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>contact@fromageriemartinet.fr</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <h2>Envoyez-nous un message</h2>
+                    <div class="form-group">
+                        <label for="contactName" class="form-label">Votre nom</label>
+                        <input type="text" id="contactName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail" class="form-label">Votre email</label>
+                        <input type="email" id="contactEmail" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject" class="form-label">Sujet</label>
+                        <input type="text" id="contactSubject" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage" class="form-label">Votre message</label>
+                        <textarea id="contactMessage" class="form-input" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="container">
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9914406082083!2d2.291906376951474!3d48.85837007133236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1685528914222!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="#" class="footer-logo">Martinet</a>
+                <p class="footer-about">Artisans fromagers passionnés depuis 2018, nous perpétuons la tradition fromagère avec des produits d'exception.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Liens rapides</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#products">Nos fromages</a></li>
+                    <li><a href="#order">Commander</a></li>
+                    <li><a href="#complaint">Réclamation</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Fromages</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Martinet 350g</a></li>
+                    <li><a href="#">Martinet 250g</a></li>
+                    <li><a href="#">Martinet 125g</a></li>
+                    <li><a href="#">Martéchèvre</a></li>
+                    <li><a href="#">Spécialités de saison</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Newsletter</h3>
+                <p>Inscrivez-vous à notre newsletter pour recevoir nos actualités et offres spéciales.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Votre email" class="newsletter-input" required>
+                    <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Fromagerie Martinet. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Votre Panier</h3>
+            <span class="cart-close" id="cartClose"><i class="fas fa-times"></i></span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotal">0 DA</span>
+        </div>
+        <div class="cart-buttons">
+            <button class="btn" id="checkoutButton">Passer la commande</button>
+            <button class="btn btn-outline" id="continueShopping">Continuer mes achats</button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Votre produit a été ajouté au panier</span>
+    </div>
+
+    <script>
+        // Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.querySelector('i').classList.toggle('fa-bars');
+            navToggle.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                    navToggle.querySelector('i').classList.add('fa-bars');
+                    navToggle.querySelector('i').classList.remove('fa-times');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Product Filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                productCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Quantity Selectors
+        const quantityButtons = document.querySelectorAll('.quantity-btn');
+        
+        quantityButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const input = button.parentElement.querySelector('.quantity-input');
+                let value = parseInt(input.value);
+                
+                if (button.classList.contains('plus')) {
+                    value++;
+                } else if (button.classList.contains('minus') && value > 1) {
+                    value--;
+                }
+                
+                input.value = value;
+            });
+        });
+
+        // Cart Functionality
+        const cartButton = document.getElementById('cartButton');
+        const cartModal = document.getElementById('cartModal');
+        const cartClose = document.getElementById('cartClose');
+        const overlay = document.getElementById('overlay');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartCount = document.querySelector('.cart-count');
+        const checkoutButton = document.getElementById('checkoutButton');
+        const continueShopping = document.getElementById('continueShopping');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        
+        let cart = [];
+        
+        // Open Cart
+        cartButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartModal.classList.add('active');
+            overlay.classList.add('active');
+        });
+        
+        // Close Cart
+        cartClose.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+        
+        continueShopping.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+        
+        // Add to Cart
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const productName = button.getAttribute('data-product');
+                const productPrice = parseInt(button.getAttribute('data-price'));
+                const quantity = parseInt(productCard.querySelector('.quantity-input').value);
+                const productImage = productCard.querySelector('img').src;
+                
+                // Check if product already in cart
+                const existingProductIndex = cart.findIndex(item => item.name === productName);
+                
+                if (existingProductIndex !== -1) {
+                    // Update quantity if product already in cart
+                    cart[existingProductIndex].quantity += quantity;
+                } else {
+                    // Add new product to cart
+                    cart.push({
+                        name: productName,
+                        price: productPrice,
+                        quantity: quantity,
+                        image: productImage
+                    });
+                }
+                
+                updateCart();
+                
+                // Show notification
+                notificationText.textContent = `${quantity} ${productName} ajouté au panier`;
+                notification.classList.add('active');
+                notification.classList.add('success');
+                
+                setTimeout(() => {
+                    notification.classList.remove('active');
+                    setTimeout(() => {
+                        notification.classList.remove('success');
+                    }, 300);
+                }, 3000);
+            });
+        });
+        
+        // Update Cart
+        function updateCart() {
+            // Clear cart items
+            cartItems.innerHTML = '';
+            
+            let total = 0;
+            let count = 0;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart">Votre panier est vide</p>';
+            } else {
+                // Add items to cart
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    count += item.quantity;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+                    cartItem.innerHTML = `
+                        <div class="cart-item-img">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">${item.price} DA x ${item.quantity}</div>
+                        </div>
+                        <button class="cart-item-remove" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    
+                    cartItems.appendChild(cartItem);
+                });
+                
+                // Add event listeners to remove buttons
+                const removeButtons = document.querySelectorAll('.cart-item-remove');
+                removeButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const index = parseInt(button.getAttribute('data-index'));
+                        cart.splice(index, 1);
+                        updateCart();
+                    });
+                });
+            }
+            
+            // Update total and count
+            cartTotal.textContent = `${total} DA`;
+            cartCount.textContent = count;
+        }
+        
+        // Checkout
+        checkoutButton.addEventListener('click', () => {
+            if (cart.length === 0) {
+                notificationText.textContent = 'Votre panier est vide';
+                notification.classList.add('active');
+                notification.classList.add('error');
+                
+                setTimeout(() => {
+                    notification.classList.remove('active');
+                    setTimeout(() => {
+                        notification.classList.remove('error');
+                    }, 300);
+                }, 3000);
+                return;
+            }
+            
+            cartModal.classList.remove('active');
+            overlay.classList.remove('active');
+            
+            // Scroll to order form
+            document.querySelector('#order').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // Form Submissions
+        const orderForm = document.getElementById('orderForm');
+        const complaintForm = document.getElementById('complaintForm');
+        const contactForm = document.getElementById('contactForm');
+        const newsletterForm = document.querySelector('.newsletter-form');
+        
+        orderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (cart.length === 0) {
+                notificationText.textContent = 'Veuillez ajouter des produits au panier';
+                notification.classList.add('active');
+                notification.classList.add('error');
+                
+                setTimeout(() => {
+                    notification.classList.remove('active');
+                    setTimeout(() => {
+                        notification.classList.remove('error');
+                    }, 300);
+                }, 3000);
+                return;
+            }
+            
+            // Simulate form submission
+            notificationText.textContent = 'Votre commande a été passée avec succès!';
+            notification.classList.add('active');
+            notification.classList.add('success');
+            
+            // Reset cart
+            cart = [];
+            updateCart();
+            orderForm.reset();
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+                setTimeout(() => {
+                    notification.classList.remove('success');
+                }, 300);
+            }, 5000);
+        });
+        
+        complaintForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            notificationText.textContent = 'Votre réclamation a été envoyée avec succès!';
+            notification.classList.add('active');
+            notification.classList.add('success');
+            
+            complaintForm.reset();
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+                setTimeout(() => {
+                    notification.classList.remove('success');
+                }, 300);
+            }, 5000);
+        });
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            notificationText.textContent = 'Votre message a été envoyé avec succès!';
+            notification.classList.add('active');
+            notification.classList.add('success');
+            
+            contactForm.reset();
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+                setTimeout(() => {
+                    notification.classList.remove('success');
+                }, 300);
+            }, 5000);
+        });
+        
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            notificationText.textContent = 'Merci de vous être abonné à notre newsletter!';
+            notification.classList.add('active');
+            notification.classList.add('success');
+            
+            newsletterForm.reset();
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+                setTimeout(() => {
+                    notification.classList.remove('success');
+                }, 300);
+            }, 5000);
+        });
+        
+        // Testimonial Slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const prevButton = document.querySelector('.testimonial-control.prev');
+        const nextButton = document.querySelector('.testimonial-control.next');
+        let currentTestimonial = 0;
+        
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+            
+            currentTestimonial = index;
+            if (currentTestimonial < 0) currentTestimonial = testimonials.length - 1;
+            if (currentTestimonial >= testimonials.length) currentTestimonial = 0;
+            
+            testimonials[currentTestimonial].classList.add('active');
+        }
+        
+        prevButton.addEventListener('click', () => {
+            showTestimonial(currentTestimonial - 1);
+        });
+        
+        nextButton.addEventListener('click', () => {
+            showTestimonial(currentTestimonial + 1);
+        });
+        
+        // Auto-rotate testimonials
+        setInterval(() => {
+            showTestimonial(currentTestimonial + 1);
+        }, 5000);
+        
+        // Animation on scroll
+        const animatedElements = document.querySelectorAll('.animate');
+        
+        function checkScroll() {
+            animatedElements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initial check
+        checkScroll();
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', checkScroll);
+        
+        // Initialize cart
+        updateCart();
+    </script>
+</body>
+</html>
